@@ -99,7 +99,11 @@ def run(args):
             
             # Get predicted bounding box coordinates
             out_xmin, out_ymin, out_xmax, out_ymax = out_bboxes[i][0]
+            
+            # Get the first pred point
             out_pt1 = (int(out_xmin), int(out_ymin))
+            
+            # Get the second pred point
             out_pt2 = (int(out_xmax), int(out_ymax))
             
             out_img = cv2.rectangle(im.squeeze().permute(1, 2, 0).cpu().numpy(),pt1, pt2,(0,255,0),2)
