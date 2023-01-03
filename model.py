@@ -15,7 +15,10 @@ class Model(torch.nn.Module):
         # Get bounding boxes
         bbs = self.backbone(ims)
         
+        # Compute loss
         if bboxes != None:
+            
             bboxes = bboxes.unsqueeze(0)
-            loss = torch.nn.MSELoss()(bbs, bboxes)            
+            loss = torch.nn.MSELoss()(bbs, bboxes)       
+            
             return bbs, loss
