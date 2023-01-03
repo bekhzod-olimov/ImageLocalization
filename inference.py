@@ -64,8 +64,10 @@ def run(args):
     
     # Get the train model
     model = Model(model_name, num_classes)
+    # from the checkpoint and change to gpu
     model.load_state_dict(torch.load(model_path))
     model.to(device)
+    # Turn evaluation mode on
     model.eval();
     
     def vizualization(images, gt_bboxes, out_bboxes):
