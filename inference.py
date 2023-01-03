@@ -20,15 +20,17 @@ def run(args):
     data_path = args.data_path
     model_name=args.model_name
     model_path = args.model_path
+    argstr = yaml.dump(args.__dict__, default_flow_style=False)
+    print(f"\nTraining Arguments:\n{argstr}\n")
     
     # Set train variables
     img_size = 140
     num_classes = 4
     
-    argstr = yaml.dump(args.__dict__, default_flow_style=False)
-    print(f"\nTraining Arguments:\n{argstr}\n")
-    
+    # Read the data
     df = pd.read_csv(path)
+    
+    # Split the data into train and validation sets
     train_df, valid_df = train_test_split(df, test_size=0.2, random_state=42)
         
     train_augmentations = A.Compose([A.Resize(img_size, img_size), 
