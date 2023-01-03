@@ -77,7 +77,10 @@ def run(args):
         Gets images, ground truth bounding boxes, and predicted bounding boxes
         and displays them as comparison: image + ground truth with bounding box
         image + predicted bounding box.
-        
+
+        Arguments:
+        images - input images;
+        gt_bboxes - ground truth 
         
         """
         
