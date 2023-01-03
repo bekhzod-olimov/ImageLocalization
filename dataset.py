@@ -24,8 +24,10 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
         ymin = example.ymin
         ymax = example.ymax
 
+        # Create bounding box using the coordinates
         bbox = [[xmin, ymin, xmax, ymax]]
 
+        # Get image path
         im_path = self.data_dir + example.img_path
         im = cv2.cvtColor(cv2.imread(im_path), cv2.COLOR_BGR2RGB)
 
