@@ -88,11 +88,16 @@ def run(args):
         # Go through the images one by one
         for i, im in enumerate(images):
             
-            # Get bounding box coordinates
+            # Get gt bounding box coordinates
             xmin, ymin, xmax, ymax = gt_bboxes[i]
+            
+            # Get the first gt point
             pt1 = (int(xmin), int(ymin))
+            
+            # Get the secound gt point
             pt2 = (int(xmax), int(ymax))
             
+            # Get predicted bounding box coordinates
             out_xmin, out_ymin, out_xmax, out_ymax = out_bboxes[i][0]
             out_pt1 = (int(out_xmin), int(out_ymin))
             out_pt2 = (int(out_xmax), int(out_ymax))
