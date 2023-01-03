@@ -70,7 +70,19 @@ def run(args):
     # Turn evaluation mode on
     model.eval();
     
+    # Vizualization function    
     def vizualization(images, gt_bboxes, out_bboxes):
+        
+        """
+        Gets images, ground truth bounding boxes, and predicted bounding boxes
+        and displays them as comparison: image + ground truth with bounding box
+        image + predicted bounding box.
+        
+        
+        """
+        
+        
+        
         for i, im in enumerate(images):
             xmin, ymin, xmax, ymax = gt_bboxes[i]
             pt1 = (int(xmin), int(ymin))
