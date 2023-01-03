@@ -20,9 +20,10 @@ def run(args):
     data_path = args.data_path
     model_name=args.model_name
     model_path = args.model_path
+    
+    # Set train variables
     img_size = 140
     num_classes = 4
-        
     
     argstr = yaml.dump(args.__dict__, default_flow_style=False)
     print(f"\nTraining Arguments:\n{argstr}\n")
