@@ -62,6 +62,7 @@ def run(args):
     print("Shape of one batch images : {}".format(im.shape))
     print("Shape of one batch bboxes : {}".format(bbox.shape))
     
+    # Get the train model
     model = Model(model_name, num_classes)
     model.load_state_dict(torch.load(model_path))
     model.to(device)
