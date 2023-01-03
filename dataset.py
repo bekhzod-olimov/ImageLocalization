@@ -38,7 +38,7 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
             im = data['image']
             bbox = data['bboxes'][0]
 
-        # 
+        # Transform to tensor
         im = torch.from_numpy(im).permute(2, 0, 1) / 255.
         bbox = torch.Tensor(bbox)
 
