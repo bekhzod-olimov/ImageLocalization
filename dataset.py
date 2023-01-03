@@ -18,6 +18,7 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
         # Get an example from the dataset
         example = self.df.iloc[idx]
 
+        # Get the coordinates of a bounding box
         xmin = example.xmin
         xmax = example.xmax
         ymin = example.ymin
