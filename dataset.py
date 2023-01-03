@@ -31,11 +31,14 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
         im_path = self.data_dir + example.img_path
         im = cv2.cvtColor(cv2.imread(im_path), cv2.COLOR_BGR2RGB)
 
+        # Apply augmentations
         if self.augs:
+            
             data = self.augs(image=im, bboxes=bbox, class_labels=[None])
             im = data['image']
             bbox = data['bboxes'][0]
 
+        # 
         im = torch.from_numpy(im).permute(2, 0, 1) / 255.
         bbox = torch.Tensor(bbox)
 
