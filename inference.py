@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 
 def run(args):
     
+    # Get train arguments    
     bs = args.batch_size
     device = args.device
     path = args.ims_path
