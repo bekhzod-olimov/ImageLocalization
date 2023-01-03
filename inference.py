@@ -80,7 +80,8 @@ def run(args):
 
         Arguments:
         images - input images;
-        gt_bboxes - ground truth 
+        gt_bboxes - ground truth;
+        out_bboxes - predicted bounding boxes.
         
         """
         
