@@ -87,6 +87,8 @@ def run(args):
 
         # Go through the images one by one
         for i, im in enumerate(images):
+            
+            # Get bounding box coordinates
             xmin, ymin, xmax, ymax = gt_bboxes[i]
             pt1 = (int(xmin), int(ymin))
             pt2 = (int(xmax), int(ymax))
