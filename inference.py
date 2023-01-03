@@ -33,13 +33,15 @@ def run(args):
     # Split the data into train and validation sets
     train_df, valid_df = train_test_split(df, test_size=0.2, random_state=42)
         
+    # Get train transformations  
     train_augmentations = A.Compose([A.Resize(img_size, img_size), 
                                      A.HorizontalFlip(p=0.5),
                                      A.VerticalFlip(p=0.5),
                                      A.Rotate()
                                      ], bbox_params=A.BboxParams(format='pascal_voc', 
                                      label_fields = ['class_labels']))
-
+    
+    # Get validation transformations
     valid_augmentations = A.Compose([A.Resize(img_size, img_size),
                                     ], bbox_params=A.BboxParams(format='pascal_voc', 
                                     label_fields = ['class_labels']))
