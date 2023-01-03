@@ -2,7 +2,10 @@ import torch, cv2
 
 class ObjectLocalizationDataset(torch.utils.data.Dataset):
     
+    # Initialization
     def __init__(self, df, data_dir, augmentations=None):
+        
+        # Get arguments
         self.df = df
         self.augs = augmentations
         self.data_dir = data_dir
@@ -11,6 +14,8 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
         return len(self.df)
 
     def __getitem__(self, idx):
+        
+        # Get an example from the dataset
         example = self.df.iloc[idx]
 
         xmin = example.xmin
