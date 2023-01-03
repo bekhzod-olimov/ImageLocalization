@@ -84,9 +84,8 @@ def run(args):
         out_bboxes - predicted bounding boxes.
         
         """
-        
-        
-        
+
+        # Go through the images one by one
         for i, im in enumerate(images):
             xmin, ymin, xmax, ymax = gt_bboxes[i]
             pt1 = (int(xmin), int(ymin))
