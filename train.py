@@ -99,12 +99,20 @@ def run(args):
             # Move them to gpu
             ims, gts = ims.to(device), gts.to(device)
             
+            # Get bounding boxes, and loss value
             bboxes, loss = model(ims, gts)
+            
+            # Zero grad for the optimizer
             opt.zero_grad()
+            
+            # Backprop and optimizer step
             loss.backward()
             opt.step()
+            
+            # Add batch loss to the total loss
             total_loss += loss.item()
             
+        # Return average loss for the epoch
         return total_loss / len(dl)
     
     def eval_fn(model, dl):
