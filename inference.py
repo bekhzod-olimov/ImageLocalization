@@ -115,7 +115,10 @@ def run(args):
             plt.imshow(out_img)
             plt.axis('off')
     
+    # Create lists for later use
     ims, gts, bbs = [], [], []
+    
+    # Go through the dataset
     for i, batch in enumerate(validset):
         if i == 8:
             break
