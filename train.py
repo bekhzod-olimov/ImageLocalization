@@ -65,6 +65,7 @@ def run(args):
     print("Shape of one batch images : {}".format(im.shape))
     print("Shape of one batch bboxes : {}".format(bbox.shape))
     
+    # Initialize train model and move it to gpu
     model = Model(model_name, num_classes)
     model.to(device)
     
