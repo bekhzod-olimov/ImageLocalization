@@ -22,12 +22,8 @@ def run(args):
     argstr = yaml.dump(args.__dict__, default_flow_style=False)
     print(f"\nTraining Arguments:\n{argstr}")
     
-    epochs = 300
-    img_size = 140
-    num_classes = 4
-        
-    
-    
+    # Set train variables
+    epochs, img_size, num_classes  = 300, 140, 4
     
     df = pd.read_csv(path)
     train_df, valid_df = train_test_split(df, test_size=0.2, random_state=42)
