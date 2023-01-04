@@ -156,9 +156,11 @@ def run(args):
 
         # Return average batch for the dataloader
         return total_loss / len(dl)
-    
-    
+
+    # Initialize optimizer
     opt = torch.optim.Adam(model.parameters(), lr=lr)
+    
+    # Set the best validation loss
     best_valid_loss = np.Inf
     
     for epoch in range(epochs):
