@@ -69,7 +69,17 @@ def run(args):
     model = Model(model_name, num_classes)
     model.to(device)
     
+    # Train function
     def train_fn(model, dl, opt):
+        
+        """
+        
+        Gets train model, train dataloader, and optimizer performs one epoch of training
+        and returns loss value.
+        
+        
+        
+        """
         
         total_loss = 0.
         model.train()
