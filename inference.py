@@ -134,12 +134,13 @@ def run(args):
             gts.append(gt)
             bbs.append(pred_bbox[0])
     plt.figure(figsize=(60,40))
+    
+    # Visualize
     vizualization(ims, gts, bbs)   
-     
 
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser(description='Image Localization Training Arguments')
+    parser = argparse.ArgumentParser(description='Image Localization Inference Arguments')
     parser.add_argument("-bs", "--batch_size", type=int, default=64, help="Batch size")
     parser.add_argument("-d", "--device", type=str, default='cuda:0', help="GPU device number")
     parser.add_argument("-ip", "--ims_path", type=str, default='./train.csv', help="Path to the images")
