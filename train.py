@@ -25,8 +25,11 @@ def run(args):
     # Set train variables
     epochs, img_size, num_classes  = 300, 140, 4
     
+    # Read the csv data
     df = pd.read_csv(path)
-    train_df, valid_df = train_test_split(df, test_size=0.2, random_state=42)
+    
+    # Split the data into train and validation parts
+    train_df, valid_df = train_test_split(df, test_size = 0.2, random_state = 42)
         
     train_augmentations = A.Compose([A.Resize(img_size, img_size), 
                                      A.HorizontalFlip(p=0.5),
