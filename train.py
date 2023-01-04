@@ -176,7 +176,7 @@ def run(args):
             print("Best weights are saved!")
             best_valid_loss = valid_loss
             
-        # Verbose
+        # Training progress
         print(f"Epoch {epoch + 1} train loss: {train_loss:.3f}")
         print(f"Epoch {epoch + 1} valid loss: {valid_loss:.3f}") 
 
