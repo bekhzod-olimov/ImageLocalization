@@ -163,14 +163,20 @@ def run(args):
     # Set the best validation loss
     best_valid_loss = np.Inf
     
+    # Start training
     for epoch in range(epochs):
+        
+        # Get train and validation losses
         train_loss = train_fn(model, trainloader, opt)
         valid_loss = eval_fn(model, validloader)
         
+        # Save the model with the best loss value
         if valid_loss < best_valid_loss:
             torch.save(model.state_dict(), "best_model.pt")
             print("Best weights are saved!")
             best_valid_loss = valid_loss
+            
+        # Verbose
         print(f"Epoch {epoch + 1} train loss: {train_loss:.3f}")
         print(f"Epoch {epoch + 1} valid loss: {valid_loss:.3f}") 
 
