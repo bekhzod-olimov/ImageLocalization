@@ -43,6 +43,7 @@ def run(args):
                                     ], bbox_params=A.BboxParams(format='pascal_voc', 
                                     label_fields = ['class_labels']))
     
+    # Get train and validation datasets
     trainset = ObjectLocalizationDataset(train_df, augmentations=train_augmentations, data_dir=data_path)
     validset = ObjectLocalizationDataset(valid_df, augmentations=valid_augmentations, data_dir=data_path)
     print(f"Number of training samples: {len(trainset)}")
