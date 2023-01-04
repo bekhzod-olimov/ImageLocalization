@@ -77,7 +77,10 @@ def run(args):
         Gets train model, train dataloader, and optimizer performs one epoch of training
         and returns loss value.
         
-        
+        Arguments:
+        model - train model;
+        dl - train dataloader;
+        opt - optimizer.        
         
         """
         
