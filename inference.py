@@ -120,8 +120,12 @@ def run(args):
     
     # Go through the dataset
     for i, batch in enumerate(validset):
+        
+        # Break the loop after 8 samples
         if i == 8:
             break
+        
+        # Turn off gradient computation
         with torch.no_grad():
             im, gt = batch
             im = im.unsqueeze(0).to(device)
