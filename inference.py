@@ -106,9 +106,12 @@ def run(args):
             # Get the second pred point
             out_pt2 = (int(out_xmax), int(out_ymax))
             
-            out_img = cv2.rectangle(im.squeeze().permute(1, 2, 0).cpu().numpy(),pt1, pt2,(0,255,0),2)
-            out_img = cv2.rectangle(out_img,out_pt1, out_pt2,(255,0,0),2)
-            plt.subplot(2, 4, i+1)      
+            # Get the output images with bounding boxes
+            out_img = cv2.rectangle(im.squeeze().permute(1, 2, 0).cpu().numpy(), pt1, pt2, (0,255,0),2)
+            out_img = cv2.rectangle(out_img,out_pt1, out_pt2, (255,0,0), 2)
+            
+            # Plot the output images
+            plt.subplot(2, 4, i + 1)      
             plt.imshow(out_img)
             plt.axis('off')
     
