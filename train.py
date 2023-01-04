@@ -115,7 +115,20 @@ def run(args):
         # Return average loss for the epoch
         return total_loss / len(dl)
     
+    # Validation function
     def eval_fn(model, dl):
+        
+        """
+        
+        Gets train model, validation dataloader and performs validation step 
+        and returns validation loss value.
+        
+        Arguments:
+        model - train model;
+        dl - train dataloader;
+        opt - optimizer.        
+        
+        """
         
         total_loss = 0.
         model.eval()
