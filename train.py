@@ -12,19 +12,22 @@ from model import Model
 
 def run(args):
     
+    # Get the arguments
     bs = args.batch_size
     device = args.device
     path = args.ims_path
     data_path = args.data_path
     model_name=args.model_name
     lr = args.learning_rate
+    argstr = yaml.dump(args.__dict__, default_flow_style=False)
+    print(f"\nTraining Arguments:\n{argstr}")
+    
     epochs = 300
     img_size = 140
     num_classes = 4
         
     
-    argstr = yaml.dump(args.__dict__, default_flow_style=False)
-    print(f"\nTraining Arguments:\n{argstr}\n")
+    
     
     df = pd.read_csv(path)
     train_df, valid_df = train_test_split(df, test_size=0.2, random_state=42)
