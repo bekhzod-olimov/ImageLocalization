@@ -84,7 +84,10 @@ def run(args):
         
         """
         
+        # Set initial loss value
         total_loss = 0.
+        
+        # Turn train model for the model
         model.train()
         
         for batch in tqdm(dl):
