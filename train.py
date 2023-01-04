@@ -144,10 +144,17 @@ def run(args):
                 
                 # Get images and ground truth bounding boxes
                 ims, gts = batch
+                
+                # Move them to gou
                 ims, gts = ims.to(device), gts.to(device)
+                
+                # Get predicted bounding boxes and validation loss value
                 bboxes, loss = model(ims, gts)
+                
+                # Add the loss for the mini-batch to the total loss
                 total_loss += loss.item()
 
+        # Return average batch for the dataloader
         return total_loss / len(dl)
     
     
