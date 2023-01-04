@@ -90,9 +90,15 @@ def run(args):
         # Turn train model for the model
         model.train()
         
+        # Go through train dataloader
         for batch in tqdm(dl):
+            
+            # Get images and bounding boxes
             ims, gts = batch
+            
+            # Move them to gpu
             ims, gts = ims.to(device), gts.to(device)
+            
             bboxes, loss = model(ims, gts)
             opt.zero_grad()
             loss.backward()
