@@ -49,9 +49,18 @@ def run(args):
     print(f"Number of training samples: {len(trainset)}")
     print(f"Number of validation samples: {len(validset)}\n")
     
+    # Initialize train and validation dataloaders
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=bs, shuffle=True)
     validloader = torch.utils.data.DataLoader(validset, batch_size=bs, shuffle=False)
+   
+    # Double check the train dataloader
     for im, bbox in trainloader:
+        break;
+    print("Shape of one batch images : {}".format(im.shape))
+    print("Shape of one batch bboxes : {}".format(bbox.shape))
+    
+    # Double check the validation dataloader
+    for im, bbox in validloader:
         break;
     print("Shape of one batch images : {}".format(im.shape))
     print("Shape of one batch bboxes : {}".format(bbox.shape))
