@@ -130,7 +130,10 @@ def run(args):
         
         """
         
+        # Set initial loss value
         total_loss = 0.
+        
+        # Change to model evaluation mode
         model.eval()
         with torch.no_grad():
             
