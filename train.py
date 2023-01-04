@@ -135,9 +135,14 @@ def run(args):
         
         # Change to model evaluation mode
         model.eval()
+        
+        # Turn off gradient calculation
         with torch.no_grad():
             
+            # Go through validation dataloader
             for batch in tqdm(dl):
+                
+                # Get images and ground truth bounding boxes
                 ims, gts = batch
                 ims, gts = ims.to(device), gts.to(device)
                 bboxes, loss = model(ims, gts)
