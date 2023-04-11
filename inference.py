@@ -1,3 +1,4 @@
+# Import libraries
 import os, argparse, yaml, cv2, torch, torchvision, timm
 from torch.nn import *
 from torchvision import transforms
@@ -31,19 +32,19 @@ def run(args):
     df = pd.read_csv(path)
     
     # Split the data into train and validation sets
-    train_df, valid_df = train_test_split(df, test_size=0.2, random_state=42)
+    train_df, valid_df = train_test_split(df, test_size = 0.2, random_state = 2022)
         
     # Get train transformations  
     train_augmentations = A.Compose([A.Resize(img_size, img_size), 
-                                     A.HorizontalFlip(p=0.5),
-                                     A.VerticalFlip(p=0.5),
-                                     A.Rotate()
-                                     ], bbox_params=A.BboxParams(format='pascal_voc', 
+                                     A.HorizontalFlip(p = 0.5),
+                                     A.VerticalFlip(p = 0.5),
+                                     A.Rotate()],
+                                     bbox_params = A.BboxParams(format = 'pascal_voc', 
                                      label_fields = ['class_labels']))
     
     # Get validation transformations
-    valid_augmentations = A.Compose([A.Resize(img_size, img_size),
-                                    ], bbox_params=A.BboxParams(format='pascal_voc', 
+    valid_augmentations = A.Compose([A.Resize(img_size, img_size)],
+                                    bbox_params = A.BboxParams(format = 'pascal_voc', 
                                     label_fields = ['class_labels']))
     
     # Get train and validation datasets
