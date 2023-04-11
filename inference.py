@@ -81,9 +81,15 @@ def run(args):
         image + predicted bounding box.
 
         Arguments:
-        images - input images;
-        gt_bboxes - ground truth;
-        out_bboxes - predicted bounding boxes.
+        
+            images      - input images, list -> tensor;
+            gt_bboxes   - ground truth, list -> tensor;
+            out_bboxes  - predicted bounding boxes, list -> tensor.
+            
+            
+        Output:
+        
+            figure      - figure with images, ground truth, and predicted masks, matplotlib pyplot object.
         
         """
 
