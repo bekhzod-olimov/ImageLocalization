@@ -19,9 +19,9 @@ def run(args):
     device = args.device
     path = args.ims_path
     data_path = args.data_path
-    model_name=args.model_name
+    model_name = args.model_name
     model_path = args.model_path
-    argstr = yaml.dump(args.__dict__, default_flow_style=False)
+    argstr = yaml.dump(args.__dict__, default_flow_style = False)
     print(f"\nTraining Arguments:\n{argstr}\n")
     
     # Set train variables
@@ -48,14 +48,14 @@ def run(args):
                                     label_fields = ['class_labels']))
     
     # Get train and validation datasets
-    trainset = ObjectLocalizationDataset(train_df, augmentations=train_augmentations, data_dir=data_path)
-    validset = ObjectLocalizationDataset(valid_df, augmentations=valid_augmentations, data_dir=data_path)
+    trainset = ObjectLocalizationDataset(train_df, augmentations = train_augmentations, data_dir = data_path)
+    validset = ObjectLocalizationDataset(valid_df, augmentations = valid_augmentations, data_dir = data_path)
     print(f"Number of training samples: {len(trainset)}")
     print(f"Number of validation samples: {len(validset)}\n")
     
     # Get train and validation dataloaders
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=bs, shuffle=True)
-    validloader = torch.utils.data.DataLoader(validset, batch_size=bs, shuffle=False)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size = bs, shuffle = True)
+    validloader = torch.utils.data.DataLoader(validset, batch_size = bs, shuffle = False)
     
     # Double check the traindataloader
     for im, bbox in trainloader:
@@ -75,7 +75,8 @@ def run(args):
     def vizualization(images, gt_bboxes, out_bboxes):
         
         """
-        Gets images, ground truth bounding boxes, and predicted bounding boxes
+        
+        This function gets images, ground truth bounding boxes, and predicted bounding boxes
         and displays them as comparison: image + ground truth with bounding box
         image + predicted bounding box.
 
