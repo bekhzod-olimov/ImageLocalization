@@ -15,18 +15,13 @@ import matplotlib.pyplot as plt
 def run(args):
     
     # Get train arguments    
-    bs = args.batch_size
-    device = args.device
-    path = args.ims_path
-    data_path = args.data_path
-    model_name = args.model_name
-    model_path = args.model_path
+    bs, device, path, data_path, model_name, model_path = args.batch_size, args.device, args.ims_path, args.data_path, args.model_name, args.model_path
+    
     argstr = yaml.dump(args.__dict__, default_flow_style = False)
     print(f"\nTraining Arguments:\n{argstr}\n")
     
     # Set train variables
-    img_size = 140
-    num_classes = 4
+    img_size, num_classes = 140, 4
     
     # Read the data
     df = pd.read_csv(path)
