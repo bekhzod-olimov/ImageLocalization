@@ -1,16 +1,12 @@
 # Import libraries
-import os, argparse, yaml, cv2, torch, torchvision, timm
+import os, argparse, yaml, cv2, torch, torchvision, timm, pandas as pd, numpy as np, albumentations as A, matplotlib.pyplot as plt
 from torch.nn import *
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
-import pandas as pd 
-import numpy as np 
 from sklearn.model_selection import train_test_split
-import albumentations as A
 from dataset import ObjectLocalizationDataset
 from model import Model
-import matplotlib.pyplot as plt
 
 def run(args):
     
@@ -34,13 +30,13 @@ def run(args):
                                      A.HorizontalFlip(p = 0.5),
                                      A.VerticalFlip(p = 0.5),
                                      A.Rotate()],
-                                     bbox_params = A.BboxParams(format = 'pascal_voc', 
-                                     label_fields = ['class_labels']))
+                                     bbox_params = A.BboxParams(format = "pascal_voc", 
+                                     label_fields = ["class_labels"]))
     
     # Get validation transformations
     valid_augmentations = A.Compose([A.Resize(img_size, img_size)],
-                                    bbox_params = A.BboxParams(format = 'pascal_voc', 
-                                    label_fields = ['class_labels']))
+                                    bbox_params = A.BboxParams(format = "pascal_voc", 
+                                    label_fields = ["class_labels"]))
     
     # Get train and validation datasets
     trainset = ObjectLocalizationDataset(train_df, augmentations = train_augmentations, data_dir = data_path)
@@ -49,8 +45,7 @@ def run(args):
     print(f"Number of validation samples: {len(validset)}\n")
     
     # Get train and validation dataloaders
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size = bs, shuffle = True)
-    validloader = torch.utils.data.DataLoader(validset, batch_size = bs, shuffle = False)
+    trainloader, validloader = torch.utils.data.DataLoader(trainset, batch_size = bs, shuffle = True), torch.utils.data.DataLoader(validset, batch_size = bs, shuffle = False)
     
     # Double check the traindataloader
     for im, bbox in trainloader:
@@ -66,7 +61,6 @@ def run(args):
     # Turn evaluation mode on
     model.eval();
     
-    # Vizualization function    
     def vizualization(images, gt_bboxes, out_bboxes):
         
         """
@@ -75,12 +69,11 @@ def run(args):
         and displays them as comparison: image + ground truth with bounding box
         image + predicted bounding box.
 
-        Arguments:
+        Parameters:
         
             images      - input images, list -> tensor;
             gt_bboxes   - ground truth, list -> tensor;
             out_bboxes  - predicted bounding boxes, list -> tensor.
-            
             
         Output:
         
