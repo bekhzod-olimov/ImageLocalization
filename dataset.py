@@ -1,17 +1,28 @@
+# Import libraries
 import torch, cv2
 
 class ObjectLocalizationDataset(torch.utils.data.Dataset):
     
+    """
+    
+    This class gets several parameters and returns dataset.
+    
+    Parameters:
+    
+        df              - input dataframe, pandas object;
+        data_dir        - path to directory with data, str;
+        augmentations   - augmentations to be applied, albumentations object.
+    
+    """
+    
     # Initialization
-    def __init__(self, df, data_dir, augmentations=None):
+    def __init__(self, df, data_dir, augmentations = None):
         
         # Get arguments
-        self.df = df
-        self.augs = augmentations
-        self.data_dir = data_dir
+        self.df, self.augs, self.data_dir = df, augmentations, data_dir
 
-    def __len__(self):
-        return len(self.df)
+    # Get length of the dataset
+    def __len__(self): return len(self.df)
 
     def __getitem__(self, idx):
         
@@ -19,10 +30,7 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
         example = self.df.iloc[idx]
 
         # Get the coordinates of a bounding box
-        xmin = example.xmin
-        xmax = example.xmax
-        ymin = example.ymin
-        ymax = example.ymax
+        xmin, xmax, ymin, ymax = example.xmin, example.xmax, example.ymin, example.ymax
 
         # Create bounding box using the coordinates
         bbox = [[xmin, ymin, xmax, ymax]]
@@ -34,12 +42,10 @@ class ObjectLocalizationDataset(torch.utils.data.Dataset):
         # Apply augmentations
         if self.augs:
             
-            data = self.augs(image=im, bboxes=bbox, class_labels=[None])
-            im = data['image']
-            bbox = data['bboxes'][0]
+            data = self.augs(image = im, bboxes = bbox, class_labels = [None])
+            im, bbox = data["image"], data["bboxes"][0]
 
         # Transform to tensor
-        im = torch.from_numpy(im).permute(2, 0, 1) / 255.
-        bbox = torch.Tensor(bbox)
+        im, bbox = torch.from_numpy(im).permute(2, 0, 1) / 255., torch.Tensor(bbox)
 
         return im, bbox
