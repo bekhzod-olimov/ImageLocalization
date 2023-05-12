@@ -118,8 +118,7 @@ def run(args):
     for i, batch in enumerate(validset):
         
         # Break the loop after 8 samples
-        if i == 8:
-            break
+        if i == 8: break
         
         # Turn off gradient computation
         with torch.no_grad():
@@ -129,6 +128,7 @@ def run(args):
             ims.append(im)
             gts.append(gt)
             bbs.append(pred_bbox[0])
+    
     plt.figure(figsize=(60,40))
     
     # Visualize
@@ -136,14 +136,20 @@ def run(args):
 
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser(description='Image Localization Inference Arguments')
-    parser.add_argument("-bs", "--batch_size", type=int, default=64, help="Batch size")
-    parser.add_argument("-d", "--device", type=str, default='cuda:0', help="GPU device number")
+    # Initialize argument parser    
+    parser = argparse.ArgumentParser(description = "Image Localization Inference Arguments")
+    
+    # Add arguments to the parser
+    parser.add_argument("-bs", "--batch_size", type = int, default = 64, help="Batch size")
+    parser.add_argument("-d", "--device", type = str, default = "cuda:0", help = "GPU device number")
     parser.add_argument("-ip", "--ims_path", type=str, default='./train.csv', help="Path to the images")
     parser.add_argument("-dp", "--data_path", type=str, default='./', help="Path to the data")
     parser.add_argument("-mn", "--model_name", type=str, default='efficientnet_b3a', help="Model name (from timm library (ex. darknet53, ig_resnext101_32x32d))")
     parser.add_argument("-mp", "--model_path", type=str, default='./best_model.pt', help="Path to the trained model")
     parser.add_argument("-lr", "--learning_rate", type=float, default=1e-3, help="Learning rate value") # from find_lr
+    
+    # Parse the arguments
     args = parser.parse_args() 
     
+    # Run the script
     run(args) 
