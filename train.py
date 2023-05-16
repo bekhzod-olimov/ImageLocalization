@@ -70,7 +70,7 @@ def run(args):
         
         Parameters:
         
-            model       - train model, torch model object;
+            model       - train model, timm model object;
             dl          - train dataloader, torch dataloader object;
             opt         - optimizer, torch optimizer object.        
         
@@ -117,7 +117,7 @@ def run(args):
         
         Parameters:
         
-            model    - a model, torch model object;
+            model    - a model, timm model object;
             dl       - validation dataloader, torch dataloader object.
         
         """
@@ -174,13 +174,19 @@ def run(args):
 
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser(description='Image Localization Training Arguments')
-    parser.add_argument("-bs", "--batch_size", type=int, default=64, help="Batch size")
-    parser.add_argument("-d", "--device", type=str, default='cuda:0', help="GPU device number")
-    parser.add_argument("-ip", "--ims_path", type=str, default='./train.csv', help="Path to the images")
-    parser.add_argument("-dp", "--data_path", type=str, default='./', help="Path to the data")
-    parser.add_argument("-mn", "--model_name", type=str, default='efficientnet_b3a', help="Model name (from timm library (ex. darknet53, ig_resnext101_32x32d))")
-    parser.add_argument("-lr", "--learning_rate", type=float, default=1e-3, help="Learning rate value") # from find_lr
+    # Initialize Argument Parser    
+    parser = argparse.ArgumentParser(description = "Image Localization Training Arguments")
+    
+    # Add arguments to the parser
+    parser.add_argument("-bs", "--batch_size", type = int, default = 64, help = "Batch size")
+    parser.add_argument("-d", "--device", type = str, default = 'cuda:0', help = "GPU device number")
+    parser.add_argument("-ip", "--ims_path", type = str, default = './train.csv', help = "Path to the images")
+    parser.add_argument("-dp", "--data_path", type = str, default = './', help = "Path to the data")
+    parser.add_argument("-mn", "--model_name", type = str, default = 'efficientnet_b3a', help = "Model name (from timm library (ex. darknet53, ig_resnext101_32x32d))")
+    parser.add_argument("-lr", "--learning_rate", type = float, default = 1e-3, help = "Learning rate value") # from find_lr
+    
+    # Parse the arguments
     args = parser.parse_args() 
     
+    # Run the script
     run(args) 
