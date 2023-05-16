@@ -27,19 +27,18 @@ def run(args):
         
     # Initialize train dataset transformations
     train_augmentations = A.Compose([A.Resize(img_size, img_size), 
-                                     A.HorizontalFlip(p=0.5),
-                                     A.VerticalFlip(p=0.5),
+                                     A.HorizontalFlip(p = 0.5),
+                                     A.VerticalFlip(p = 0.5),
                                      A.Rotate()
-                                     ], bbox_params=A.BboxParams(format='pascal_voc', 
-                                     label_fields = ['class_labels']))
+                                     ], bbox_params = A.BboxParams(format = "pascal_voc", label_fields = ["class_labels"]))
+    
     # Initialize validation dataset transformations
     valid_augmentations = A.Compose([A.Resize(img_size, img_size),
-                                    ], bbox_params=A.BboxParams(format='pascal_voc', 
-                                    label_fields = ['class_labels']))
+                                    ], bbox_params = A.BboxParams(format = "pascal_voc", 
+                                    label_fields = ["class_labels"]))
     
     # Get train and validation datasets
-    trainset = ObjectLocalizationDataset(train_df, augmentations=train_augmentations, data_dir=data_path)
-    validset = ObjectLocalizationDataset(valid_df, augmentations=valid_augmentations, data_dir=data_path)
+    trainset, validset = ObjectLocalizationDataset(train_df, augmentations = train_augmentations, data_dir = data_path), ObjectLocalizationDataset(valid_df, augmentations = valid_augmentations, data_dir = data_path)
     print(f"Number of training samples: {len(trainset)}")
     print(f"Number of validation samples: {len(validset)}\n")
     
