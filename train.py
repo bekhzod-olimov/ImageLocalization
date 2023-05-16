@@ -43,8 +43,7 @@ def run(args):
     print(f"Number of validation samples: {len(validset)}\n")
     
     # Initialize train and validation dataloaders
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=bs, shuffle=True)
-    validloader = torch.utils.data.DataLoader(validset, batch_size=bs, shuffle=False)
+    trainloader, validloader = torch.utils.data.DataLoader(trainset, batch_size = bs, shuffle = True), torch.utils.data.DataLoader(validset, batch_size = bs, shuffle = False)
    
     # Double check the train dataloader
     for im, bbox in trainloader:
@@ -67,13 +66,13 @@ def run(args):
         
         """
         
-        Gets train model, train dataloader, and optimizer performs one epoch of training
-        and returns loss value.
+        This function gets train model, train dataloader, and optimizer performs one epoch of training and returns loss value.
         
-        Arguments:
-        model - train model;
-        dl - train dataloader;
-        opt - optimizer.        
+        Parameters:
+        
+            model       - train model, torch model object;
+            dl          - train dataloader, torch dataloader object;
+            opt         - optimizer, torch optimizer object.        
         
         """
         
@@ -113,13 +112,13 @@ def run(args):
         
         """
         
-        Gets train model, validation dataloader and performs validation step 
+        This function gets train model, validation dataloader and performs validation step 
         and returns validation loss value.
         
-        Arguments:
-        model - train model;
-        dl - train dataloader;
-        opt - optimizer.        
+        Parameters:
+        
+            model    - a model, torch model object;
+            dl       - validation dataloader, torch dataloader object.
         
         """
         
