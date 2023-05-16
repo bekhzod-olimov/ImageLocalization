@@ -1,25 +1,19 @@
-import os, argparse, yaml, cv2, torch, torchvision, timm
+# Import libraries
+import os, argparse, yaml, cv2, torch, torchvision, timm, pandas as pd, numpy as np, albumentations as A
 from torch.nn import *
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
-import pandas as pd 
-import numpy as np 
 from sklearn.model_selection import train_test_split
-import albumentations as A
 from dataset import ObjectLocalizationDataset
 from model import Model
 
 def run(args):
     
     # Get the arguments
-    bs = args.batch_size
-    device = args.device
-    path = args.ims_path
-    data_path = args.data_path
-    model_name=args.model_name
-    lr = args.learning_rate
-    argstr = yaml.dump(args.__dict__, default_flow_style=False)
+    bs, device, path, data_path, model_name, lr = args.batch_size, args.device, args.ims_path, args.data_path, args.model_name, args.learning_rate
+    
+    argstr = yaml.dump(args.__dict__, default_flow_style = False)
     print(f"\nTraining Arguments:\n{argstr}")
     
     # Set train variables
