@@ -24,6 +24,22 @@ class Model(torch.nn.Module):
         
     def forward(self, ims, bboxes = None):
         
+        """
+        
+        This function gets several parameters and returns extracted features and loss value.
+        
+        Parameters:
+        
+            ims     - images to be trained, tensor;
+            bboxes  - bounding boxes, list.
+            
+        Outputs:
+        
+            bbs     - extracted features from the backbone, tensor;
+            loss    - loss value, float.
+        
+        """
+        
         # Get bounding boxes
         bbs = self.backbone(ims)
         
