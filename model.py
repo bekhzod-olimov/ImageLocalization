@@ -1,6 +1,18 @@
+# Import libraries
 import torch, timm
 
 class Model(torch.nn.Module):
+    
+    """
+    
+    This class gets several parameters and returns model to be trained.
+    
+    Parameters:
+    
+        model_name    - name of a model to be trained, str;
+        num_classes   - number of classes in the dataset for training, int.
+    
+    """
     
     # Initialization
     def __init__(self, model_name, num_classes):
