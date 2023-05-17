@@ -19,10 +19,10 @@ class Model(torch.nn.Module):
         super(Model, self).__init__()
         
         # Backbone for the localization model
-        self.backbone = timm.create_model(model_name, pretrained=True, num_classes=num_classes)
+        self.backbone = timm.create_model(model_name, pretrained = True, num_classes = num_classes)
         print(f"{model_name} with num_classes of {num_classes} is successfully loaded!")
         
-    def forward(self, ims, bboxes=None):
+    def forward(self, ims, bboxes = None):
         
         # Get bounding boxes
         bbs = self.backbone(ims)
@@ -30,7 +30,11 @@ class Model(torch.nn.Module):
         # Compute loss
         if bboxes != None:
             
+            # Get bounding boxes
             bboxes = bboxes.unsqueeze(0)
+            
+            # Compute loss
             loss = torch.nn.MSELoss()(bbs, bboxes)       
             
+            # Return feature maps and loss value
             return bbs, loss
